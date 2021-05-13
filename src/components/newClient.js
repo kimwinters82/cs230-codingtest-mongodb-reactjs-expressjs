@@ -39,6 +39,15 @@ class NewClient extends Component {
   changeHandler =(e) =>{
       this.setState({[e.target.name]: e.target.value})
   }
+  handleMessage =(e) =>{
+    this.setState({Message: e.target.value})
+  }
+  handleRefer =(e) =>{
+    this.setState({ReferredBy: e.target.value})
+}
+handleParent =(e) =>{
+    this.setState({Parent: e.target.value})
+}
   postClient = (e) => {
       e.preventDefault()
       if (this.state.update === true){
@@ -222,22 +231,27 @@ class NewClient extends Component {
                 /></label></div>}
             {this.state.update === false &&
                 <div>
-                <label>Parent/Guardian: 
-                    <input 
-                    type="text" 
-                    name="Parent" 
-                    value={Parent}
-                    onChange={this.changeHandler}
-                /></label></div>}
+                    <label for="Parent">Parent/Guardian: </label>
+                    <select id={Parent} onChange={this.handleParent}>
+                        <option>Please select</option>
+                        <option value={"Over 18 - not needed"}> Over 18 - not needed</option> 
+                        <option value={"Parent/Guardian"}> Parent/Guardian - form signed </option>  
+                    </select>
+                </div>
+            }
             {this.state.update === false &&
                 <div>
-                <label>Get messages to: 
-                    <input 
-                    type="text" 
-                    name="Message" 
-                    value={Message}
-                    onChange={this.changeHandler}
-                /></label></div>}
+                    <label for="Message">Get messages to: </label>
+                    <select id={Message} onChange={this.handleMessage}>
+                        <option>Please select</option>
+                        <option value={"Mobile"}> Mobile</option> 
+                        <option value={"Home"}> Home </option>
+                        <option value={"Email"}> Email </option> 
+                        <option value={"Text"}> Text</option> 
+                        <option value={"No contact"}> No contact </option> 
+                    </select>
+                </div>
+            }
             {this.state.update === false &&
                 <div>
                 <label>Registered on: 
@@ -249,7 +263,7 @@ class NewClient extends Component {
                 /></label></div>}
             {this.state.update === false &&
                 <div>
-                <label>Doctor: 
+                <label>Doctor's name: 
                     <input 
                     type="text" 
                     name="Doctor" 
@@ -258,13 +272,16 @@ class NewClient extends Component {
                 /></label></div>}
             {this.state.update === false &&
                 <div>
-                <label>Referred by: 
-                    <input 
-                    type="text" 
-                    name="ReferredBy" 
-                    value={ReferredBy}
-                    onChange={this.changeHandler}
-                /></label></div>}
+                    <label for="ReferredBy">Referred by: </label>
+                    <select id={ReferredBy} onChange={this.handleRefer}>
+                        <option>Please select</option>
+                        <option value={"GP"}> GP</option> 
+                        <option value={"Hospital"}> Hospital </option>
+                        <option value={"Work"}> Work </option> 
+                        <option value={"Not Referred"}> Not Referred </option>  
+                    </select>
+                </div>
+            }
             <button className="buttonStyle"type="submit" value="Submit">{this.state.update === true ?"Update Client Account":"Create Client Account"}</button>
       </form>
       

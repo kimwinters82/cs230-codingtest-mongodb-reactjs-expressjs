@@ -40,6 +40,15 @@ class NewSession extends Component {
   handleSession = (e) => {
     this.setState({Session: e.target.value});
   }
+  handleDuration = (e) => {
+    this.setState({Duration: e.target.value});
+  }
+  handleFee = (e) => {
+    this.setState({Fee: e.target.value});
+  }
+  handleType = (e) => {
+    this.setState({Type: e.target.value});
+  }
   changeHandler =(e) =>{
       this.setState({[e.target.name]: e.target.value})
   }
@@ -117,7 +126,7 @@ class NewSession extends Component {
             </option> ))} 
           </select>
           </div>}
-          {this.state.update === true &&<div>
+        {this.state.update === true &&<div>
             <label name="Session"><b>Select Session: </b></label>
             <select value ={Session} onChange={this.handleSession}>
               <option>Please select</option>
@@ -161,41 +170,51 @@ class NewSession extends Component {
           </div>}
         {this.state.update === false &&
           <div>
-            <label>Fee: 
-                <input 
-                    type="text" 
-                    name="Fee" 
-                    value={Fee}
-                    onChange={this.changeHandler}
-            /></label></div>}
+            <label for="Fee">Fee: </label>
+            <select id={Fee} onChange={this.handleFee}>
+                <option>Please select</option>
+                <option value={40}> €40</option> 
+                <option value={60}> €60</option> 
+                <option value={75}> €75</option> 
+            </select>
+           </div>
+        }
         {this.state.update === false &&
             <div>
-              <label>Duration: 
-                <input 
-                    type="text" 
-                    name="Duration" 
-                    value={Duration}
-                    onChange={this.changeHandler}
-                /></label></div>}
+            <label for="Duration">Duration: </label>
+                <select id={Duration} onChange={this.handleDuration}>
+                    <option>Please select</option>
+                    <option value={30}> 30</option> 
+                    <option value={45}> 45</option> 
+                    <option value={60}> 60</option> 
+                </select>
+            </div>
+        } 
         {this.state.update === false &&
             <div>
-            <label>Session Number: 
-                <input 
-                    type="text" 
-                    name="Number" 
-                    value={Number}
-                    onChange={this.changeHandler}
-                /></label></div>}
+                <label>Session Number: 
+                    <input 
+                        type="text" 
+                        name="Number" 
+                        value={Number}
+                        onChange={this.changeHandler}
+                /></label>
+            </div>
+        }
         {this.state.update === false &&
             <div>
-            <label>Session Type: 
-                <input 
-                    type="text" 
-                    name="Type" 
-                    value={Type}
-                    onChange={this.changeHandler}
-                /></label></div>}
-            
+                <label for="Type">Session Type: </label>
+                    <select id={Type} onChange={this.handleType}>
+                        <option>Please select</option>
+                        <option value={"Assessment"}> Assessment</option> 
+                        <option value={"Hydrotherapy"}> Hydrotherapy </option>
+                        <option value={"Electrotherapy"}> Electrotherapy </option> 
+                        <option value={"Stretching"}> Stretching </option> 
+                        <option value={"Massage Therapy"}> Massage Therapy</option> 
+                    </select>
+            </div>
+        }
+        {this.state.Type && console.log(this.state.Type)}    
             <div>
                 <label>Notes: 
                     <input 
