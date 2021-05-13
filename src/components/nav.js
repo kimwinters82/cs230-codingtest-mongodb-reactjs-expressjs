@@ -9,7 +9,7 @@ class Nav extends Component {
         
     }
   }
-  
+  //created a really simple navigation bar which will stay at the top of the page
   render() {
     return (
         <div>

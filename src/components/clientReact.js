@@ -3,27 +3,23 @@ import{
   Link
 } from "react-router-dom";
 
+//this file shows GET and DELETE CRUD connections for client collection
 class ClientReact extends Component {
   constructor(props) {
     super(props);
     this.state ={
       clients: [],
-      custOrders: []
+      
     }
   }
+  //updates everytime the component is mounted (you may need to refresh page after deletions to see change)-> GET
   componentDidMount = () => {
     fetch('http://localhost:5000/client')
     .then(res => res.json())
     .then(clients => this.setState({clients: clients}, () => console.log(this.state.clients)));
   }
-  getOrders(id){
-    this.setState({custOrders: []})
-    fetch(`http://localhost:5000/orders/${id}`)
-    .then(res => res.json())
-    .then(data => console.log(data));
-  }
-  
-  //removes the customer from the customer collection
+
+  //removes the client from the client collection -> DELETE
   deleteClient(id){
     fetch(`http://localhost:5000/client/${id}`,{
       method: 'DELETE',
@@ -31,7 +27,7 @@ class ClientReact extends Component {
     .then(res => res.json())
     .then(data => alert("Successfully deleted"));
   }
-  //removes all sessions for the specified client
+  //removes all sessions for the specified client -> DELETE
   deleteSessions(id){
     fetch(`http://localhost:5000/session/client/${id}`,{
       method: 'DELETE',
@@ -44,7 +40,7 @@ class ClientReact extends Component {
       <div className="underNav">
         <Link to="/newClient"><button className="buttonStyle">Create New Client</button></Link>
         <Link to="/newClient"><button className="buttonStyle">Update Client Details</button></Link>
-        {this.state.custorders && console.log(this.state.custorders)}
+        
         {this.state.clients.map((c) =>(
           <p key={c._id}>
             <h3>{c.Title} {c.Firstname} {c.Surname}</h3>

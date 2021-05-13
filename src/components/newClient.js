@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+//this file handles my POST and PATCH requests for client collection
 class NewClient extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +28,7 @@ class NewClient extends Component {
       
     }
   }
+  //GET the cliet collection in case user wants to update an existing account
   componentDidMount = () => {
     fetch('http://localhost:5000/client')
     .then(res => res.json())
@@ -48,6 +50,8 @@ class NewClient extends Component {
 handleParent =(e) =>{
     this.setState({Parent: e.target.value})
 }
+  //I added my POST and PATCH to the same handler as I re-used the same form
+  //If / else statement controls the flow for request and the body that is sent
   postClient = (e) => {
       e.preventDefault()
       if (this.state.update === true){

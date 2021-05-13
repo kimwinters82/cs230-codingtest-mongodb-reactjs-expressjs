@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+
+//this file shows POST and PATCH CRUD connections for session collection
 class NewSession extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +22,7 @@ class NewSession extends Component {
         Session: ''
     }
   }
+  //used to GET all the collections as they are needed for adding new sessions and updating existing
   componentDidMount = () => {
     fetch('http://localhost:5000/client')
     .then(res => res.json())
@@ -31,6 +34,7 @@ class NewSession extends Component {
     .then(res => res.json())
     .then(sessions => this.setState({sessions: sessions}, () => console.log(this.state.sessions)));
   }
+  //I used lots of drop down menus to control the user input so these are my setState handlers for these
   handleClient = (e) => {
     this.setState({Client: e.target.value});
   }
@@ -52,6 +56,8 @@ class NewSession extends Component {
   changeHandler =(e) =>{
       this.setState({[e.target.name]: e.target.value})
   }
+  //I added my POST and PATCH to the same handler as I re-used the same form
+  //If / else statement controls the flow for request and the body that is sent
   postSession = (e) => {
       e.preventDefault()
       if (this.state.update === true){

@@ -3,7 +3,8 @@ import{
   Link
 } from "react-router-dom";
 
-class ClientReact extends Component {
+//this file shows GET and DELETE CRUD connections for session collection
+class SessionReact extends Component {
   constructor(props) {
     super(props);
     this.state ={
@@ -11,19 +12,14 @@ class ClientReact extends Component {
       custOrders: []
     }
   }
+  //updates everytime component is mounted -> used to map sessions to screen -> GET
   componentDidMount = () => {
     fetch('http://localhost:5000/session')
     .then(res => res.json())
     .then(sessions => this.setState({sessions: sessions}, () => console.log(this.state.sessions)));
   }
-  getOrders(id){
-    this.setState({custOrders: []})
-    fetch(`http://localhost:5000/orders/${id}`)
-    .then(res => res.json())
-    .then(data => console.log(data));
-  }
-  
-  //removes the session from the session collection
+    
+  //removes the session from the session collection -> DELETE
   deleteSession(id){
     fetch(`http://localhost:5000/session/${id}`,{
       method: 'DELETE',
@@ -54,4 +50,4 @@ class ClientReact extends Component {
   } // end of render function
 } // end of class
 
-export default ClientReact;
+export default SessionReact;

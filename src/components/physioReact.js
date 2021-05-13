@@ -3,6 +3,7 @@ import{
   Link
 } from "react-router-dom";
 
+//this file shows GET and DELETE CRUD connections for physio collection
 class PhysioReact extends Component {
   constructor(props) {
     super(props);
@@ -11,13 +12,14 @@ class PhysioReact extends Component {
       
     }
   }
+  //updates each time coponent is mounted -> GET
   componentDidMount = () => {
     fetch('http://localhost:5000/physio')
     .then(res => res.json())
     .then(physios => this.setState({physios: physios}, () => console.log(this.state.physios)));
   }
   
-  //removes the physio from the physio collection
+  //removes the physio from the physio collection -> DELETE
   deletePhysio(id){
     fetch(`http://localhost:5000/physio/${id}`,{
       method: 'DELETE',
@@ -25,7 +27,7 @@ class PhysioReact extends Component {
     .then(res => res.json())
     .then(data => alert("Successfully deleted", data));
   }
-  //removes all orders for the specified customer
+  //removes all orders for the specified customer -> DELETE
   deleteSessions(id){
     fetch(`http://localhost:5000/session/${id}`,{
       method: 'DELETE',

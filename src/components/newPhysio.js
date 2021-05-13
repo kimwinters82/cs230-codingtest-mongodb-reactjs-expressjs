@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+//this file shows POST and PATCH CRUD connections for session collection
 class NewPhysio extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +22,7 @@ class NewPhysio extends Component {
       
     }
   }
+  //updates everytime component is mounted -> GET
   componentDidMount = () => {
     fetch('http://localhost:5000/physio')
     .then(res => res.json())
@@ -33,6 +35,8 @@ class NewPhysio extends Component {
   changeHandler =(e) =>{
       this.setState({[e.target.name]: e.target.value})
   }
+  //I added my POST and PATCH to the same handler as I re-used the same form
+  //If / else statement controls the flow for request and the body that is sent
   postPhysio = (e) => {
       e.preventDefault()
       if (this.state.update === true){
